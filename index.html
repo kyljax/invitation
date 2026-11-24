@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Application Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="invitationHomes.png" type="image/x-icon">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-color: #f8fafc;
+            --form-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --input-focus-ring: rgba(37, 99, 235, 0.2);
+            --error-color: #ef4444;
+            --success-color: #10b981;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--form-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .header {
+            /* background: var(--primary-color); */
+            /* background: url("invitationHomes.png"); */
+            color: white;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            /* invitationHomes.png */
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            /* background: url("invitationHomes.png"); */
+
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        form {
+            padding: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+            /* background: url("invitationHomes.png"); */
+        }
+
+        .section-title:first-child {
+            margin-top: 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            font-family: inherit;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background-color: #fff;
+            color: var(--text-main);
+            transition: all 0.2s ease;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #94a3b8;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px var(--input-focus-ring);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            font-weight: 400;
+            cursor: pointer;
+            gap: 0.5rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            gap: 0.75rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-top: 0.25rem;
+            width: 1.125rem;
+            height: 1.125rem;
+            accent-color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            font-weight: 400;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            line-height: 1.5;
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #fff;
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            margin-top: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+
+        .btn-submit:disabled {
+            background-color: var(--text-muted);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Success Message Overlay */
+        .success-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--form-bg);
+            z-index: 10;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .success-overlay.active {
+            display: flex;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-overlay h2 {
+            font-size: 1.75rem;
+            color: var(--text-main);
+            margin-bottom: 0.75rem;
+        }
+
+        .success-overlay p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div style="background: no-repeat center; background-size: contain; margin:0% auto; width: 90%;align-self: center;">
+            <img src="invitationHomes3.png" alt="invitationHomesLogo" srcset="" width="70%">
+        </div>
+        <div class="header" style="background-color:rgba(0,10,190,0.8);text-shadow: 1px 1px 2px rgba(0,10,190,0.5);">
+            <h1>Rental Application Form</h1>
+            <p>Please complete the form below. Submission does not guarantee approval.</p>
+        </div>
+
+        <iframe name="submissionFrame" id="submissionFrame" title="Form submission response"
+            style="display: none;"></iframe>
+        <form id="rentalForm" method="POST" target="submissionFrame">
+            <input type="hidden" id="submissionToken" name="submissionToken">
+
+            <!-- Applicant Information -->
+            <h2 class="section-title">Applicant Information</h2>
+            <div class="grid-2">
+                <div class="form-group full-width">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="dob">Date of Birth *</label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="nationality">Nationality *</label>
+                    <input type="text" id="nationality" name="nationality" placeholder="e.g. American" required>
+                </div>
+
+
+            </div>
+
+            <!-- Contact Information -->
+            <h2 class="section-title">Contact Information</h2>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="currentAddress">Current Residential Address *</label>
+                    <textarea id="currentAddress" name="currentAddress"
+                        placeholder="123 Main St, Apt 4B, City, State, ZIP" required></textarea>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="lengthOfStay">Length of Stay at Current Address *</label>
+                    <input type="text" id="lengthOfStay" name="lengthOfStay" placeholder="e.g. 2 Years, 3 Months"
+                        required>
+                </div>
+            </div>
+
+            <!-- Payment Method -->
+            <h2 class="section-title">Payment Method</h2>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label for="paymentMethod">Preferred Payment Method *</label>
+                    <select id="paymentMethod" name="paymentMethod" required>
+                        <option value="" disabled selected>Select Method</option>
+                        <option value="zelle">Zelle</option>
+                        <option value="cashapp">Cash App</option>
+                        <option value="chime">Chime</option>
+                        <option value="venmo">Venmo</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="applepay">Apple Pay</option>
+                        <option value="walmartbarcode">Walmart Barcode</option>
+                        <!-- <option value="others">Others</option> -->
+                    </select>
+                </div>
+                <!-- <div class="form-group">
+                    <label for="paymentAccount">Indicate Method</label>
+                    <input type="text" id="paymentAccount" name="paymentAccount"
+                        placeholder="If Others Indicate method" >
+                </div> -->
+            </div>
+
+            <!-- Application Details -->
+            <h2 class="section-title">Application Details</h2>
+            <div class="grid-2">
+                <div class="form-group full-width">
+                    <label for="addressApplied">Address Applied For *</label>
+                    <input type="text" id="addressApplied" name="addressApplied" placeholder="Property Address"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="moveInDate">Intended Move-In Date *</label>
+                    <input type="date" id="moveInDate" name="moveInDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="leaseDuration">Lease Duration *</label>
+                    <select id="leaseDuration" name="leaseDuration" required>
+                        <option value="" disabled selected>Select Duration</option>
+                        <option value="6_months">6 Months</option>
+                        <option value="12_months">12 Months</option>
+                        <option value="24_months">24+ Months</option>
+                        <option value="month_to_month">Month-to-Month</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="adultsMoving">How Many Adults Moving In? *</label>
+                    <input type="number" id="adultsMoving" name="adultsMoving" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="totalOccupants">Total Number of Occupants *</label>
+                    <input type="number" id="totalOccupants" name="totalOccupants" min="1" required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="occupantNames">Names of All Occupants *</label>
+                    <textarea id="occupantNames" name="occupantNames"
+                        placeholder="List all occupants including children" required></textarea>
+                </div>
+            </div>
+
+            <!-- Pets -->
+            <h2 class="section-title">Pets</h2>
+            <div class="form-group">
+                <label>Do You Have Pets? *</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="hasPets" value="yes" onchange="togglePetDetails(true)" required> Yes
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="hasPets" value="no" onchange="togglePetDetails(false)"> No
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group full-width hidden" id="petTypeGroup">
+                <label for="petType">Pet Type / Breed & Weight</label>
+                <textarea id="petType" name="petType" placeholder="e.g. 1 Golden Retriever, 45 lbs"></textarea>
+            </div>
+
+            <!-- Employment & Income -->
+            <h2 class="section-title">Employment & Income</h2>
+            <div class="grid-2">
+                <div class="form-group full-width">
+                    <label for="employmentStatus">Employment Status *</label>
+                    <select id="employmentStatus" name="employmentStatus" required>
+                        <option value="" disabled selected>Select Status</option>
+                        <option value="employed_full">Employed (Full-Time)</option>
+                        <option value="employed_part">Employed (Part-Time)</option>
+                        <option value="self_employed">Self-Employed</option>
+                        <option value="retired">Retired</option>
+                        <option value="student">Student</option>
+                        <option value="unemployed">Unemployed</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="employerName">Employer / Business Name *</label>
+                    <input type="text" id="employerName" name="employerName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="jobTitle">Job Title / Role *</label>
+                    <input type="text" id="jobTitle" name="jobTitle" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="incomeRange">Monthly Income Range *</label>
+                    <select id="incomeRange" name="incomeRange" required>
+                        <option value="" disabled selected>Select Range</option>
+                        <option value="under_2000">Under $2,000</option>
+                        <option value="2000_4000">$2,000 - $4,000</option>
+                        <option value="4001_6000">$4,001 - $6,000</option>
+                        <option value="6001_8000">$6,001 - $8,000</option>
+                        <option value="over_8000">Over $8,000</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="employmentLength">Length of Employment *</label>
+                    <input type="text" id="employmentLength" name="employmentLength" placeholder="e.g. 3 Years"
+                        required>
+                </div>
+            </div>
+
+            <!-- Rental History -->
+            <!-- <h2 class="section-title">Rental History</h2>
+            <div class="grid-2">
+                <div class="form-group full-width">
+                    <label for="prevAddress">Previous Address</label>
+                    <textarea id="prevAddress" name="prevAddress" placeholder="If applicable"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="prevLandlord">Previous Landlord / Agent Name</label>
+                    <input type="text" id="prevLandlord" name="prevLandlord">
+                </div>
+
+                <div class="form-group">
+                    <label for="prevLandlordContact">Landlord Contact Information</label>
+                    <input type="text" id="prevLandlordContact" name="prevLandlordContact" placeholder="Phone or Email">
+                </div>
+
+                <div class="form-group">
+                    <label for="prevDuration">Duration of Previous Tenancy</label>
+                    <input type="text" id="prevDuration" name="prevDuration" placeholder="e.g. 1 Year">
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="reasonForLeaving">Reason for Leaving</label>
+                    <input type="text" id="reasonForLeaving" name="reasonForLeaving">
+                </div>
+            </div> -->
+
+            <!-- References -->
+            <h2 class="section-title">References</h2>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label for="refName">Reference Name *</label>
+                    <input type="text" id="refName" name="refName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="refRelationship">Relationship *</label>
+                    <input type="text" id="refRelationship" name="refRelationship" placeholder="e.g. Manager, Colleague"
+                        required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="refContact">Contact Information *</label>
+                    <input type="text" id="refContact" name="refContact" placeholder="Phone or Email" required>
+                </div>
+            </div>
+
+            <!-- Consent & Declaration -->
+            <h2 class="section-title">Consent & Declaration</h2>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="consentAccurate" name="consentAccurate" required>
+                <label for="consentAccurate">I declare that all information provided in this application is true and
+                    accurate to the best of my knowledge.</label>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="consentVerify" name="consentVerify" required>
+                <label for="consentVerify">I authorize the landlord/agent to verify all information provided, including
+                    employment, rental history, and conduct credit/background checks.</label>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="consentContact" name="consentContact" required>
+                <label for="consentContact">I consent to being contacted regarding the status of my application via
+                    phone or email.</label>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="consentPrivacy" name="consentPrivacy" required>
+                <label for="consentPrivacy">I agree to the Privacy Policy and understand how my data will be
+                    handled.</label>
+            </div>
+
+            <div class="grid-2" style="margin-top: 1.5rem;">
+                <div class="form-group">
+                    <label for="signature">Typed Signature (Full Name) *</label>
+                    <input type="text" id="signature" name="signature" placeholder="Type your full legal name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="submissionDate">Date *</label>
+                    <input type="date" id="submissionDate" name="submissionDate" required readonly
+                        style="background-color: #f1f5f9; cursor: not-allowed;">
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">Submit Rental Application</button>
+        </form>
+
+        <!-- Success Overlay -->
+        <div class="success-overlay" id="successOverlay">
+            <div class="success-icon">✓</div>
+            <h2>Application Submitted!</h2>
+            <p>Thank you. Your rental application has been successfully sent. We will review your details and contact
+                you shortly.</p>
+            <button type="button" class="btn-submit" onclick="resetForm()"
+                style="max-width: 200px; padding: 0.75rem;">Done</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Set auto-fill date
+        document.addEventListener('DOMContentLoaded', () => {
+            const dateInput = document.getElementById('submissionDate');
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.value = today;
+        });
+
+        // Toggle Pet Details
+        function togglePetDetails(show) {
+            const petGroup = document.getElementById('petTypeGroup');
+            const petInput = document.getElementById('petType');
+            if (show) {
+                petGroup.classList.remove('hidden');
+                petInput.setAttribute('required', 'true');
+            } else {
+                petGroup.classList.add('hidden');
+                petInput.removeAttribute('required');
+                petInput.value = '';
+            }
+        }
+
+        // Require the custom payment method input when Others is selected
+        const paymentMethodSelect = document.getElementById('paymentMethod');
+        const paymentAccountInput = document.getElementById('paymentAccount');
+        if (paymentMethodSelect && paymentAccountInput) {
+            paymentMethodSelect.addEventListener('change', () => {
+                if (paymentMethodSelect.value === 'others') {
+                    paymentAccountInput.required = true;
+                } else {
+                    paymentAccountInput.required = false;
+                }
+            });
+        }
+
+        // Replace this with the deployed Apps Script web app URL ending in /exec.
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyyPQ0nn6TKOfFgfy2jB61hXFhTGnuBdHMVq1pDydStVCoAiKBg2kU0q1df8v3HbKte/exec';
+        const form = document.getElementById('rentalForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successOverlay = document.getElementById('successOverlay');
+        const submissionFrame = document.getElementById('submissionFrame');
+        const submissionTokenInput = document.getElementById('submissionToken');
+        let submissionTimeout;
+
+        form.addEventListener('submit', function (e) {
+            if (!/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(APPS_SCRIPT_URL)) {
+                e.preventDefault();
+                alert('Set APPS_SCRIPT_URL to the deployed Google Apps Script web app URL before submitting.');
+                return;
+            }
+
+            submissionTokenInput.value = Date.now().toString(36) + '-' +
+                Math.random().toString(36).slice(2);
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            form.action = APPS_SCRIPT_URL;
+
+            setTimeout(function () {
+    window.location.href = "congratulationspage.html";
+}, 3000);
+        });
+
+        window.addEventListener('message', function (event) {
+            const result = event.data;
+            console.log('Message received:', result);
+            console.log('Expected source:', submissionFrame.contentWindow);
+            console.log('Actual source:', event.source);
+            console.log('Expected token:', submissionTokenInput.value);
+            console.log('Received token:', result && result.token);
+            console.log(event.origin);
+            if (event.source !== submissionFrame.contentWindow ||
+                !result ||
+                result.type !== 'rentalFormResult' ||
+                result.token !== submissionTokenInput.value) {
+                return;
+            }
+
+            clearTimeout(submissionTimeout);
+            if (result.ok) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Rental Application';
+                successOverlay.classList.add('active');
+            } else {
+                alert(result.message || 'The application could not be sent. Please try again later.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Rental Application';
+            }
+        });
+
+
+        // Reset Form when closing success overlay
+        function resetForm() {
+            successOverlay.classList.remove('active');
+            form.reset();
+
+            // Re-apply today's date
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('submissionDate').value = today;
+
+            // Hide pet details
+            togglePetDetails(false);
+        }
+    </script>
+
+</body>
+
+</html>
